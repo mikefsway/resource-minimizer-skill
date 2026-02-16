@@ -1,229 +1,120 @@
-# Resource Minimizer Skill - Empirical Testing Guide
+# Resource Minimizer Testing
 
-**IMPORTANT DISCLAIMER:** The files in this directory provide a **testing framework** for evaluating the resource-minimizer skill. The analysis files (THEORETICAL_*.md) contain **predictions and hypothetical results**, NOT actual empirical measurements.
+This folder contains automated tools to test the effectiveness of the resource-minimizer skill.
 
-## What's Included
+## Quick Start
 
-### ⚠️ Theoretical Framework (Not Empirical Data)
-
-These files contain **predictions** based on the skill's design:
-
-- `THEORETICAL_ANALYSIS.md` - Predicted effectiveness based on design principles
-- `THEORETICAL_SUMMARY.md` - Hypothetical results summary
-- `THEORETICAL_baseline_example.json` - Example of what baseline results might look like
-- `THEORETICAL_optimized_example.json` - Example of what optimized results might look like
-- `energy_report.json` - Sample report generated from theoretical data
-
-**These are NOT real test results.** They're examples to show you what the output format should look like.
-
-### ✅ Actual Testing Tools (Ready to Use)
-
-- `energy_assessment.py` - Python tool to analyze real test results
-- `test_scenarios.json` - 10 comprehensive test scenarios you can run
-- `test_results_template.json` - Template for recording your results
-- `RUN_TESTS.md` - Step-by-step instructions (this file explains the full process)
-
-## Quick Start: Run Your Own Empirical Tests
-
-Follow these steps to actually test the skill's effectiveness:
-
-### Prerequisites
-
-- Claude.ai account OR Claude Code CLI installed
-- Python 3.7+ (for analysis tool)
-- Text editor
-- ~30-60 minutes
-
-### Step 1: Install the Skill
-
-**For Claude.ai:**
+### 1. Install Dependencies
 ```bash
-cd ..
-zip -r resource-minimizer.zip resource-minimizer/
-# Upload via Claude.ai → Settings → Capabilities → Skills → Upload
+pip install -r requirements.txt
 ```
 
-**For Claude Code CLI:**
+### 2. Set Your API Key
 ```bash
-# macOS/Linux
-cp -r ../resource-minimizer ~/.config/claude-code/skills/
-
-# Windows
-copy ..\resource-minimizer %APPDATA%\claude-code\skills\
+export ANTHROPIC_API_KEY="sk-ant-..."
 ```
 
-### Step 2: Run Baseline Tests (WITHOUT skill)
-
-1. **Disable the skill** (or use Claude session without it)
-2. Open `test_scenarios.json` and pick 5-10 scenarios
-3. For each scenario:
-   - Copy the `test_prompt` exactly
-   - Send it to Claude
-   - Record metrics in `my_baseline_results.json` (use template below)
-
-**What to record:**
-- Approximate input tokens (count words × 1.3)
-- Output tokens (count Claude's response words × 1.3)
-- Number of tool calls Claude made
-- Number of back-and-forth exchanges needed
-- Your quality rating (1-5)
-- Your satisfaction rating (1-5)
-
-### Step 3: Run Optimized Tests (WITH skill)
-
-1. **Enable the skill** (invoke it with `/resource-minimizer` or ensure it's active)
-2. Run the SAME scenarios with the SAME prompts
-3. Record the same metrics in `my_optimized_results.json`
-
-**CRITICAL:** Use identical prompts to ensure fair comparison.
-
-### Step 4: Analyze Results
-
+### 3. Run Tests
 ```bash
-python3 energy_assessment.py --compare my_baseline_results.json my_optimized_results.json
+# Quick test (5 scenarios, ~5 minutes)
+python3 automated_test_runner.py --quick
+
+# Try the demo first (2 scenarios)
+./demo_automated_testing.sh
+
+# Run all scenarios
+python3 automated_test_runner.py --all
+
+# Run specific scenarios
+python3 automated_test_runner.py --scenarios 1,3,5
 ```
 
-This will show you:
-- Actual token reduction %
-- Actual energy savings
-- Actual cost savings
-- Quality comparison
-- Whether the skill meets effectiveness targets
-
-### Step 5: Share Your Results (Optional)
-
-If you run empirical tests, please consider sharing your results:
-- Open an issue on GitHub with your findings
-- Include your analysis report
-- Help improve the skill based on real-world data
-
-## Recording Your Results
-
-Use this JSON template for `my_baseline_results.json` and `my_optimized_results.json`:
-
-```json
-{
-  "test_suite": "My Baseline Tests",
-  "date": "2026-02-16",
-  "skill_enabled": false,
-  "model": "claude-sonnet-4.5",
-  "tester_name": "Your Name",
-  "results": [
-    {
-      "scenario_id": "scenario_001",
-      "scenario_name": "Multi-Step Code Refactoring",
-      "prompt_tokens": 1200,
-      "completion_tokens": 3200,
-      "total_tokens": 4400,
-      "tool_calls": 15,
-      "round_trips": 3,
-      "execution_time_ms": 12500,
-      "quality_score": 4.5,
-      "user_satisfaction": 4.2,
-      "notes": "Your observations here"
-    }
-  ]
-}
+### 4. View Results
+```bash
+cat automated_test_runs/run_*/comparison_report.txt
 ```
 
-### How to Estimate Tokens
+## What Gets Tested
 
-If you don't have exact token counts:
+The automated testing framework:
+- Runs test scenarios through two separate agents (baseline without skill, optimized with skill)
+- Captures actual token counts from the Anthropic API
+- Measures tool usage, quality, and efficiency
+- Generates comparison reports automatically
 
-**Rough estimate:**
-- 1 token ≈ 0.75 words (or 1 word ≈ 1.3 tokens)
-- Count words in your prompt × 1.3 = prompt_tokens
-- Count words in Claude's response × 1.3 = completion_tokens
+## Test Results
 
-**For Claude.ai users:**
-- Check the response metadata if available
-- Use word count as approximation
+See `empirical_test_results.md` for actual test results showing **41.4% token reduction** across complex scenarios.
 
-**For API users:**
-- Token counts are in the API response
+## Files Overview
 
-### Counting Tool Calls
+| File | Purpose |
+|------|---------|
+| `automated_test_runner.py` | Main automated testing script |
+| `demo_automated_testing.sh` | Quick demo (try this first) |
+| `test_scenarios.json` | Test scenarios used by the runner |
+| `energy_assessment.py` | Analysis tool (auto-run by test runner) |
+| `requirements.txt` | Python dependencies |
+| `test_results_template.json` | Template for manual testing (optional) |
+| `empirical_test_results.md` | Actual test results |
+| `AUTOMATED_TESTING_GUIDE.md` | Detailed guide for automated testing |
+| `CLAUDE_CODE_NATIVE_TESTING.md` | Alternative: test within Claude Code sessions |
+| `claude_code_test_runner.py` | Claude Code native test runner |
 
-- Count each time Claude uses a tool (Read, Write, Edit, Bash, Grep, etc.)
-- Each tool use = 1 tool call
-- Multiple tools in one response = sum them all
+## How It Works
 
-### Counting Round Trips
+```
+1. Load test scenarios from test_scenarios.json
+2. Create baseline agent (API calls without skill)
+3. Create optimized agent (API calls with skill)
+4. Run same scenarios through both agents
+5. Extract metrics from API responses (actual token counts)
+6. Generate comparison report
+7. Save full logs for transparency
+```
 
-- 1 round trip = you send message → Claude responds
-- If you had to clarify or answer questions = additional round trips
-- Initial response = 1, each follow-up = +1
+## Output
 
-## Understanding Results
+After running tests, you'll get:
 
-### Success Criteria
+```
+automated_test_runs/run_TIMESTAMP/
+├── baseline_results.json         # Baseline metrics
+├── optimized_results.json        # Optimized metrics
+├── comparison_report.txt         # Human-readable report
+├── logs/                         # Full API request/response logs
+└── transcripts/                  # Readable conversation logs
+```
 
-The skill is effective if:
+## Success Criteria
+
+The skill is effective if tests show:
 - ✅ Token reduction > 30%
-- ✅ Energy reduction > 30%
 - ✅ Quality maintained > 90% of baseline
-- ✅ Satisfaction maintained > 90% of baseline
+- ✅ User satisfaction maintained or improved
 
-### Expected Results (Based on Design)
+## Alternative: Claude Code Native Testing
 
-The theoretical analysis predicts:
-- 40-60% token reduction
-- 40-60% energy reduction
-- Quality maintained at 95%+
-- Satisfaction maintained or improved
+You can also test directly within a Claude Code session without needing an API key. See `CLAUDE_CODE_NATIVE_TESTING.md` for details.
 
-**But these are predictions!** Your empirical results may differ.
+## Need More Details?
 
-## Troubleshooting
+- **Automated testing setup and usage**: `AUTOMATED_TESTING_GUIDE.md`
+- **Claude Code native testing**: `CLAUDE_CODE_NATIVE_TESTING.md`
+- **Test scenarios**: Open `test_scenarios.json`
+- **Actual results**: `empirical_test_results.md`
 
-### "I don't know how to count tokens"
+## Manual Testing (Optional)
 
-Use word count × 1.3 as approximation. Exact precision isn't critical - we're looking for directional trends.
-
-### "The skill doesn't seem to activate"
-
-Make sure:
-- You're using scenarios marked `"should_trigger": true`
-- The skill is properly installed
-- You're using a task complex enough to trigger it (5+ steps)
-
-### "My results differ from theoretical predictions"
-
-That's fine! Real-world results often differ from theoretical predictions. Document what you found - this is valuable data.
-
-### "I only have time to test a few scenarios"
-
-Test at least 5 scenarios that should trigger the skill. More is better, but 5 gives a reasonable sample.
-
-## Files Explained
-
-| File | Type | Purpose |
-|------|------|---------|
-| `README.md` | Guide | You're reading it |
-| `RUN_TESTS.md` | Guide | Detailed step-by-step testing procedure |
-| `test_scenarios.json` | Data | 10 test scenarios with expected results |
-| `test_results_template.json` | Template | Copy this to record your results |
-| `energy_assessment.py` | Tool | Analyzes and compares test results |
-| `THEORETICAL_*.md` | Analysis | Predictions (NOT empirical data) |
-| `THEORETICAL_*.json` | Example | Sample data format (NOT real results) |
+If you prefer to test manually:
+1. Copy `test_results_template.json` to create your results files
+2. Run test scenarios manually with and without the skill
+3. Record metrics using the template
+4. Run `python3 energy_assessment.py --compare baseline.json optimized.json`
 
 ## Questions?
 
-- Check `RUN_TESTS.md` for detailed procedures
-- Review `test_scenarios.json` for scenario details
-- See `THEORETICAL_ANALYSIS.md` for methodology (but remember it's theoretical)
-- Open an issue on GitHub if you need help
-
-## Contributing Your Results
-
-If you run empirical tests, we'd love to see your findings! Please:
-1. Run at least 5 scenarios
-2. Generate your report using `energy_assessment.py`
-3. Open a GitHub issue titled "Empirical Test Results - [Your Name]"
-4. Share your methodology and findings
-
-Real-world data helps everyone understand actual effectiveness!
-
----
-
-**Remember:** The theoretical predictions are educated guesses. Your empirical results are the real validation. Please test and share your findings!
+- Check `AUTOMATED_TESTING_GUIDE.md` for comprehensive documentation
+- Review `test_scenarios.json` to understand what gets tested
+- See `empirical_test_results.md` for example results
+- Open a GitHub issue if you need help
