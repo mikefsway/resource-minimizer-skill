@@ -30,44 +30,68 @@ Then compare:
 
 ### 2. Choose Your Path
 
-**Path A: Quick Test (30 min) - Recommended First**
-- Test 5 scenarios
-- Get directional results
-- See if it's worth deeper testing
+**Path A: Automated Testing (5 min) - ✨ NEW & RECOMMENDED**
+- Fully automated with Claude API
+- Run 5 scenarios in ~5 minutes
+- No manual counting needed
+- Full transparency logs
+- Actual token counts from API
+- See `AUTOMATED_TESTING_GUIDE.md`
 
-**Path B: Comprehensive Test (60 min)**
-- Test all 10 scenarios
+**Path B: Manual Quick Test (30 min)**
+- Test 5 scenarios manually
+- Get directional results
+- Manual token counting
+- Good for learning the process
+
+**Path C: Manual Comprehensive Test (60 min)**
+- Test all 10 scenarios manually
 - Get statistical significance
 - Publishable results
+- More time investment
 
-**Path C: Just Read The Theory**
+**Path D: Just Read The Theory**
 - Read `THEORETICAL_ANALYSIS.md`
 - Understand the predictions
 - Skip actual testing
 
 ### 3. Follow the Guide
 
-📖 **Read:** `RUN_TESTS.md` - Complete step-by-step instructions
+**For Automated Testing (Recommended):**
+📖 **Read:** `AUTOMATED_TESTING_GUIDE.md`
+- Setup in 2 minutes
+- Run command, get results
+- Full transparency with logs
+- No manual work
 
-This guide covers:
+**For Manual Testing:**
+📖 **Read:** `RUN_TESTS.md` - Complete step-by-step instructions
 - How to install the skill
-- How to run tests
+- How to run tests manually
 - How to record metrics
 - How to analyze results
-- What everything means
 
 ### 4. Use the Tools
 
 | File | Purpose | When to Use |
 |------|---------|-------------|
-| `RUN_TESTS.md` | Step-by-step guide | Read first |
-| `test_scenarios.json` | Test prompts | Copy prompts from here |
-| `test_results_template.json` | Results template | Copy to record your data |
-| `energy_assessment.py` | Analysis tool | After collecting data |
+| `AUTOMATED_TESTING_GUIDE.md` | Automated testing | ⭐ Start here |
+| `automated_test_runner.py` | Run tests automatically | Main tool |
+| `demo_automated_testing.sh` | Quick demo | Try it first |
+| `RUN_TESTS.md` | Manual testing guide | If you prefer manual |
+| `test_scenarios.json` | Test prompts | Used by automated runner |
+| `energy_assessment.py` | Analysis tool | Auto-run by framework |
 | `README.md` | Overview | For reference |
 
 ## What You'll Need
 
+**For Automated Testing:**
+- ⏰ 5-10 minutes
+- 🔑 Anthropic API key
+- 🐍 Python 3.7+
+- 📦 `pip install anthropic`
+
+**For Manual Testing:**
 - ⏰ 30-60 minutes
 - 💻 Claude.ai account OR Claude Code CLI
 - 🐍 Python 3.7+ (for analysis)
@@ -166,7 +190,13 @@ The skill is effective if your tests show:
 
 ## Next Steps
 
-### Ready to Test?
+### Ready for Automated Testing? (Recommended)
+1. ✅ Read `AUTOMATED_TESTING_GUIDE.md`
+2. ✅ Set your ANTHROPIC_API_KEY
+3. ✅ Run `./demo_automated_testing.sh`
+4. ✅ Review results and verify transparency!
+
+### Ready for Manual Testing?
 1. ✅ Read `RUN_TESTS.md` completely
 2. ✅ Install the skill
 3. ✅ Copy `test_results_template.json` twice
