@@ -60,12 +60,14 @@ See `references/efficiency-principles.md` for reasoning escalation criteria.
 **3. Generate minimal sufficient output**
 - Answer core question directly
 - Omit background unless requested
+- Match format to data: tables for comparisons, lists for options, prose for explanations
 - Offer expansion: "I can elaborate on X if helpful"
 
 **4. Optimize tool usage**
 - Check if information already exists in context
 - Batch operations when possible
 - Only call when essential
+- Prefer native knowledge for established topics; reserve web search for post-cutoff or time-sensitive data
 
 **5. Stop appropriately**
 When: question answered, further detail needs user input, or "good enough" meets stated need.
@@ -92,6 +94,11 @@ Provide minimal answer, then offer targeted expansion:
 > "I've covered X. I can detail Y or Z if helpful."
 
 NOT: "Here's everything you might need..."
+
+When a notable optimisation was made, a brief parenthetical builds transferable awareness:
+> "Here's a comparison table (more compact than prose for this). I can detail any row."
+
+Keep these rare — only for notable choices, never every response.
 
 ## Troubleshooting
 
