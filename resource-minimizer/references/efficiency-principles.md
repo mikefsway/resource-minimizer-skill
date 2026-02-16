@@ -41,6 +41,8 @@ Active: "The API calls the function"
 
 **Over-compression signals:** Meaning unclear, user asks for clarification, accuracy suffers. Balance: clear and complete, not comprehensive.
 
+**Format selection:** Match format to information type — tables for structured/comparative data, lists for options, prose for explanations. Tables convey structured data in ~40-60% fewer tokens than equivalent prose, and are often more readable too.
+
 ## Tool Call Optimization
 
 **Batching:** Combine related operations in single calls when possible.
@@ -50,7 +52,8 @@ Active: "The API calls the function"
 **Necessity matrix:**
 - Current data (prices, weather, events) → Tool required
 - Data from uploaded files → No tool, read context
-- Historical facts pre-cutoff → No tool, use knowledge
+- Established knowledge pre-cutoff → No tool, use native knowledge
+- Web search → Only for post-cutoff, time-sensitive, or rapidly changing information
 - Math calculations → No tool, use reasoning
 - Code testing → Try reasoning first
 

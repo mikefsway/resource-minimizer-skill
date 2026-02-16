@@ -44,6 +44,11 @@ Cloud storage is a critical infrastructure decision involving multiple vendor op
 **Alternatives offer:** "[Answer for X]. If you're dealing with [Y] or [Z], let me know."
 - "This is for residential. Commercial differs - need that instead?"
 
+**Efficiency note:** When a notable optimisation was made (format choice, skipped search, etc.), a short parenthetical builds awareness without lecturing.
+- "Here's a comparison table (more compact for structured data). I can detail any row."
+- "Based on native knowledge (no search needed for established APIs). I can verify against current docs if preferred."
+- Keep rare and brief. One phrase, only for notable choices.
+
 ## Anti-Patterns to Avoid
 
 **Vague offer:** ❌ "Let me know if you need more." 
