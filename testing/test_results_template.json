@@ -1,0 +1,52 @@
+{
+  "test_suite": "Replace with: 'My Baseline Tests' or 'My Optimized Tests'",
+  "date": "2026-02-16",
+  "skill_enabled": false,
+  "model": "claude-sonnet-4.5",
+  "tester_name": "Your Name",
+  "platform": "claude.ai or claude-code-cli",
+  "notes": "Any setup notes or observations about your testing environment",
+  "results": [
+    {
+      "scenario_id": "scenario_001",
+      "scenario_name": "Multi-Step Code Refactoring",
+      "prompt_tokens": 0,
+      "completion_tokens": 0,
+      "total_tokens": 0,
+      "tool_calls": 0,
+      "round_trips": 1,
+      "execution_time_ms": 0,
+      "quality_score": 0.0,
+      "user_satisfaction": 0.0,
+      "notes": "Your observations about this specific test"
+    }
+  ],
+  "_instructions": {
+    "test_suite": "Set to 'My Baseline Tests' (skill_enabled: false) or 'My Optimized Tests' (skill_enabled: true)",
+    "date": "Date you ran the tests (YYYY-MM-DD)",
+    "skill_enabled": "false for baseline, true for optimized",
+    "model": "Which Claude model you're using (e.g., claude-sonnet-4.5, claude-opus-4.6)",
+    "tester_name": "Your name or identifier",
+    "platform": "claude.ai or claude-code-cli",
+    "scenario_id": "Copy from test_scenarios.json (e.g., scenario_001)",
+    "scenario_name": "Copy from test_scenarios.json",
+    "prompt_tokens": "Word count of your prompt × 1.3 (round to integer)",
+    "completion_tokens": "Word count of Claude's response × 1.3 (round to integer)",
+    "total_tokens": "prompt_tokens + completion_tokens",
+    "tool_calls": "Count each tool Claude used (Read, Write, Edit, Bash, etc.)",
+    "round_trips": "Number of back-and-forth exchanges (usually 1-3)",
+    "execution_time_ms": "Approximate time in milliseconds (5 seconds = 5000)",
+    "quality_score": "Rate 1-5: 5=Excellent, 4=Good, 3=Adequate, 2=Poor, 1=Unusable",
+    "user_satisfaction": "Rate 1-5: 5=Very satisfied, 4=Satisfied, 3=Neutral, 2=Unsatisfied, 1=Very unsatisfied",
+    "notes": "Your observations, behavioral patterns, unexpected results"
+  },
+  "_examples": {
+    "prompt_tokens_calculation": "Prompt has 24 words → 24 × 1.3 = 31 tokens",
+    "completion_tokens_calculation": "Response has 800 words → 800 × 1.3 = 1040 tokens",
+    "tool_calls_example": "Claude used Read (1) + Edit (2) + Bash (1) = 4 tool calls",
+    "round_trips_example": "You sent prompt (1) → Claude asked question → You answered (2) → Claude responded = 2 round trips",
+    "quality_score_example": "Response was comprehensive and correct but had minor formatting issues = 4/5",
+    "satisfaction_example": "Response was exactly what I needed = 5/5"
+  },
+  "_delete_these_sections": "Delete the _instructions, _examples, and _delete_these_sections before using this template. They're just for guidance."
+}
