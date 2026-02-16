@@ -1,0 +1,5 @@
+# Requirements for Automated Testing Framework
+# Install with: pip install -r requirements.txt
+
+anthropic>=0.39.0
+python-dotenv>=1.0.0
