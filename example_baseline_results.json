@@ -1,0 +1,106 @@
+{
+  "test_suite": "Resource Minimizer Baseline Tests",
+  "date": "2026-02-16",
+  "skill_enabled": false,
+  "model": "claude-sonnet-4.5",
+  "results": [
+    {
+      "scenario_id": "scenario_001",
+      "scenario_name": "Multi-Step Code Refactoring",
+      "prompt_tokens": 1200,
+      "completion_tokens": 3200,
+      "total_tokens": 4400,
+      "tool_calls": 15,
+      "round_trips": 3,
+      "execution_time_ms": 12500,
+      "quality_score": 4.5,
+      "user_satisfaction": 4.2,
+      "notes": "Complete refactoring all at once with comprehensive docs"
+    },
+    {
+      "scenario_id": "scenario_003",
+      "scenario_name": "Research Task - Security Practices",
+      "prompt_tokens": 800,
+      "completion_tokens": 2800,
+      "total_tokens": 3600,
+      "tool_calls": 5,
+      "round_trips": 2,
+      "execution_time_ms": 8200,
+      "quality_score": 4.7,
+      "user_satisfaction": 4.3,
+      "notes": "Comprehensive coverage with detailed explanations"
+    },
+    {
+      "scenario_id": "scenario_004",
+      "scenario_name": "Long Document Generation",
+      "prompt_tokens": 1500,
+      "completion_tokens": 6500,
+      "total_tokens": 8000,
+      "tool_calls": 10,
+      "round_trips": 2,
+      "execution_time_ms": 18000,
+      "quality_score": 4.6,
+      "user_satisfaction": 4.0,
+      "notes": "Full document generated upfront"
+    },
+    {
+      "scenario_id": "scenario_005",
+      "scenario_name": "Ambiguous Database Setup",
+      "prompt_tokens": 400,
+      "completion_tokens": 450,
+      "total_tokens": 850,
+      "tool_calls": 0,
+      "round_trips": 3,
+      "execution_time_ms": 3500,
+      "quality_score": 4.3,
+      "user_satisfaction": 3.8,
+      "notes": "Multiple clarification rounds before answer"
+    },
+    {
+      "scenario_id": "scenario_006",
+      "scenario_name": "Iterative Code Debugging",
+      "prompt_tokens": 1000,
+      "completion_tokens": 2500,
+      "total_tokens": 3500,
+      "tool_calls": 10,
+      "round_trips": 3,
+      "execution_time_ms": 11000,
+      "quality_score": 4.5,
+      "user_satisfaction": 4.1,
+      "notes": "Comprehensive analysis with detailed explanations"
+    },
+    {
+      "scenario_id": "scenario_008",
+      "scenario_name": "Complex Data Analysis Pipeline",
+      "prompt_tokens": 1800,
+      "completion_tokens": 5200,
+      "total_tokens": 7000,
+      "tool_calls": 20,
+      "round_trips": 3,
+      "execution_time_ms": 16500,
+      "quality_score": 4.8,
+      "user_satisfaction": 4.4,
+      "notes": "Complete implementation of all steps"
+    },
+    {
+      "scenario_id": "scenario_009",
+      "scenario_name": "Exploratory Architecture Discussion",
+      "prompt_tokens": 900,
+      "completion_tokens": 4100,
+      "total_tokens": 5000,
+      "tool_calls": 5,
+      "round_trips": 2,
+      "execution_time_ms": 10500,
+      "quality_score": 4.6,
+      "user_satisfaction": 4.2,
+      "notes": "Detailed comparison of all architectures"
+    }
+  ],
+  "summary": {
+    "total_tests": 7,
+    "total_tokens": 32350,
+    "avg_tokens_per_test": 4621.4,
+    "total_tool_calls": 65,
+    "total_round_trips": 18
+  }
+}
