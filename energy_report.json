@@ -1,0 +1,78 @@
+{
+  "test_date": "2026-02-16T14:03:22.763075",
+  "baseline_metrics": {
+    "num_tests": 7,
+    "total_prompt_tokens": 7600,
+    "total_completion_tokens": 24750,
+    "total_tokens": 32350,
+    "avg_tokens_per_test": 4621.428571428572,
+    "total_tool_calls": 65,
+    "avg_tool_calls_per_test": 9.285714285714286,
+    "total_round_trips": 18,
+    "avg_round_trips_per_test": 2.5714285714285716,
+    "avg_quality_score": 4.571428571428571,
+    "avg_user_satisfaction": 4.142857142857142
+  },
+  "optimized_metrics": {
+    "num_tests": 7,
+    "total_prompt_tokens": 7600,
+    "total_completion_tokens": 10250,
+    "total_tokens": 17850,
+    "avg_tokens_per_test": 2550.0,
+    "total_tool_calls": 28,
+    "avg_tool_calls_per_test": 4.0,
+    "total_round_trips": 8,
+    "avg_round_trips_per_test": 1.1428571428571428,
+    "avg_quality_score": 4.4714285714285715,
+    "avg_user_satisfaction": 4.271428571428571
+  },
+  "baseline_energy": {
+    "total_tokens": 47600,
+    "estimated_kwh": 0.00952,
+    "estimated_cost_usd": 0.4301,
+    "estimated_co2_kg": 0.0041
+  },
+  "optimized_energy": {
+    "total_tokens": 20250,
+    "estimated_kwh": 0.00405,
+    "estimated_cost_usd": 0.1795,
+    "estimated_co2_kg": 0.0017
+  },
+  "savings": {
+    "token_reduction_pct": 57.46,
+    "energy_reduction_pct": 57.46,
+    "cost_reduction_pct": 58.25,
+    "co2_reduction_pct": 57.46,
+    "tool_call_reduction_pct": 56.92,
+    "round_trip_reduction_pct": 55.56,
+    "energy_saved_kwh": 0.00547,
+    "cost_saved_usd": 0.2505,
+    "co2_saved_kg": 0.0024
+  },
+  "quality_assessment": {
+    "quality_maintained": true,
+    "satisfaction_maintained": true,
+    "baseline_quality": 4.57,
+    "optimized_quality": 4.47,
+    "baseline_satisfaction": 4.14,
+    "optimized_satisfaction": 4.27
+  },
+  "scaled_projections": {
+    "per_1000_tasks": {
+      "energy_saved_kwh": 0.781,
+      "cost_saved_usd": 35.79,
+      "co2_saved_kg": 0.34
+    },
+    "per_1_million_tasks": {
+      "energy_saved_kwh": 781.4,
+      "cost_saved_usd": 35785.71,
+      "co2_saved_kg": 336.0,
+      "co2_saved_metric_tons": 0.34
+    }
+  },
+  "conclusion": {
+    "effective": true,
+    "meets_targets": true,
+    "recommendation": "APPROVED"
+  }
+}

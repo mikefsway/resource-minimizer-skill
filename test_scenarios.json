@@ -1,0 +1,376 @@
+{
+  "test_suite": "Resource Minimizer Effectiveness Tests",
+  "version": "1.0.0",
+  "date_created": "2026-02-16",
+  "scenarios": [
+    {
+      "id": "scenario_001",
+      "name": "Multi-Step Code Refactoring",
+      "should_trigger": true,
+      "complexity": "high",
+      "test_prompt": "I have a Python application with authentication logic scattered across multiple files. Help me refactor it to be more maintainable with proper error handling, logging, and tests.",
+      "baseline_expected": {
+        "tokens_min": 2500,
+        "tokens_max": 4000,
+        "tool_calls": 15,
+        "round_trips": 3,
+        "characteristics": [
+          "Extensive upfront analysis",
+          "Complete refactoring all at once",
+          "Comprehensive documentation",
+          "Multiple clarification questions"
+        ]
+      },
+      "optimized_expected": {
+        "tokens_min": 1200,
+        "tokens_max": 2000,
+        "tool_calls": 8,
+        "round_trips": 1,
+        "characteristics": [
+          "Core refactoring first",
+          "Checkpoints for validation",
+          "Assume + offer corrections",
+          "Expansion offers for logging/tests"
+        ]
+      },
+      "expected_savings": {
+        "tokens": "40-50%",
+        "tool_calls": "40-50%",
+        "round_trips": "60-70%"
+      }
+    },
+    {
+      "id": "scenario_002",
+      "name": "Simple Factual Question",
+      "should_trigger": false,
+      "complexity": "trivial",
+      "test_prompt": "What is the difference between JWT and session-based authentication?",
+      "baseline_expected": {
+        "tokens_min": 200,
+        "tokens_max": 400,
+        "tool_calls": 0,
+        "round_trips": 1
+      },
+      "optimized_expected": {
+        "tokens_min": 200,
+        "tokens_max": 400,
+        "tool_calls": 0,
+        "round_trips": 1,
+        "note": "Should behave identically - skill should not activate"
+      },
+      "expected_savings": {
+        "tokens": "0%",
+        "note": "No optimization needed for simple queries"
+      }
+    },
+    {
+      "id": "scenario_003",
+      "name": "Research Task - Security Practices",
+      "should_trigger": true,
+      "complexity": "medium",
+      "test_prompt": "What are the current best practices for securing REST APIs? I'm building a financial services application.",
+      "baseline_expected": {
+        "tokens_min": 2000,
+        "tokens_max": 3500,
+        "tool_calls": 5,
+        "round_trips": 2,
+        "characteristics": [
+          "Comprehensive coverage of all practices",
+          "Detailed explanations unprompted",
+          "Multiple examples for each practice",
+          "Full implementation guides"
+        ]
+      },
+      "optimized_expected": {
+        "tokens_min": 800,
+        "tokens_max": 1500,
+        "tool_calls": 2,
+        "round_trips": 1,
+        "characteristics": [
+          "3-4 key practices with brief explanations",
+          "Financial context assumed",
+          "Offer deeper dive on specific practices",
+          "Implementation offered if needed"
+        ]
+      },
+      "expected_savings": {
+        "tokens": "50-60%",
+        "tool_calls": "50-60%",
+        "round_trips": "50%"
+      }
+    },
+    {
+      "id": "scenario_004",
+      "name": "Long Document Generation",
+      "should_trigger": true,
+      "complexity": "high",
+      "test_prompt": "Create a comprehensive technical design document for a microservices architecture with event-driven communication, including system design, data flow, security, monitoring, and deployment strategy.",
+      "baseline_expected": {
+        "tokens_min": 5000,
+        "tokens_max": 8000,
+        "tool_calls": 10,
+        "round_trips": 2,
+        "characteristics": [
+          "Full document generated upfront",
+          "All sections fully detailed",
+          "Multiple diagrams and examples",
+          "Comprehensive appendices"
+        ]
+      },
+      "optimized_expected": {
+        "tokens_min": 1500,
+        "tokens_max": 2500,
+        "tool_calls": 3,
+        "round_trips": 1,
+        "characteristics": [
+          "Document structure with key points",
+          "Core sections with minimal content",
+          "Expansion offers for each section",
+          "User chooses what to elaborate"
+        ]
+      },
+      "expected_savings": {
+        "tokens": "60-70%",
+        "tool_calls": "60-70%",
+        "round_trips": "50%"
+      }
+    },
+    {
+      "id": "scenario_005",
+      "name": "Ambiguous Database Setup",
+      "should_trigger": true,
+      "complexity": "medium",
+      "test_prompt": "I need to set up a database for my application.",
+      "baseline_expected": {
+        "tokens_min": 300,
+        "tokens_max": 500,
+        "tool_calls": 0,
+        "round_trips": 3,
+        "characteristics": [
+          "Multiple clarification questions",
+          "Which database?",
+          "What OS?",
+          "What framework?",
+          "Context reload per round-trip"
+        ]
+      },
+      "optimized_expected": {
+        "tokens_min": 400,
+        "tokens_max": 700,
+        "tool_calls": 0,
+        "round_trips": 1,
+        "characteristics": [
+          "Assume PostgreSQL + common setup",
+          "Provide basic installation steps",
+          "Offer alternatives (MySQL, SQLite)",
+          "Single response covers likely case"
+        ]
+      },
+      "expected_savings": {
+        "tokens": "Context loading savings ~54%",
+        "round_trips": "66%",
+        "note": "Savings from avoiding clarification round-trips"
+      }
+    },
+    {
+      "id": "scenario_006",
+      "name": "Iterative Code Debugging",
+      "should_trigger": true,
+      "complexity": "high",
+      "test_prompt": "My React app has a memory leak. Can you help me find and fix it? [Provides component code]",
+      "baseline_expected": {
+        "tokens_min": 2000,
+        "tokens_max": 3000,
+        "tool_calls": 10,
+        "round_trips": 3,
+        "characteristics": [
+          "Comprehensive analysis of all components",
+          "Multiple debugging approaches simultaneously",
+          "Detailed explanations of React internals",
+          "Full refactoring suggestions"
+        ]
+      },
+      "optimized_expected": {
+        "tokens_min": 1000,
+        "tokens_max": 1500,
+        "tool_calls": 5,
+        "round_trips": 2,
+        "characteristics": [
+          "Identify most likely cause first",
+          "Suggest targeted fix",
+          "Test fix effectiveness",
+          "Offer additional debugging if needed"
+        ]
+      },
+      "expected_savings": {
+        "tokens": "40-50%",
+        "tool_calls": "40-50%",
+        "round_trips": "33%"
+      }
+    },
+    {
+      "id": "scenario_007",
+      "name": "Quick Clarification",
+      "should_trigger": false,
+      "complexity": "trivial",
+      "test_prompt": "How do I concatenate strings in Python?",
+      "baseline_expected": {
+        "tokens_min": 100,
+        "tokens_max": 200,
+        "tool_calls": 0,
+        "round_trips": 1
+      },
+      "optimized_expected": {
+        "tokens_min": 100,
+        "tokens_max": 200,
+        "tool_calls": 0,
+        "round_trips": 1,
+        "note": "Should behave identically - skill should not activate"
+      },
+      "expected_savings": {
+        "tokens": "0%",
+        "note": "No optimization needed"
+      }
+    },
+    {
+      "id": "scenario_008",
+      "name": "Complex Data Analysis Pipeline",
+      "should_trigger": true,
+      "complexity": "high",
+      "test_prompt": "Help me build a data analysis pipeline that: 1) Ingests CSV files from S3, 2) Cleans and validates data, 3) Performs statistical analysis, 4) Generates visualizations, 5) Exports results to database.",
+      "baseline_expected": {
+        "tokens_min": 4000,
+        "tokens_max": 6000,
+        "tool_calls": 20,
+        "round_trips": 3,
+        "characteristics": [
+          "Complete implementation of all 5 steps",
+          "Comprehensive error handling throughout",
+          "Detailed documentation for each component",
+          "Multiple alternative approaches"
+        ]
+      },
+      "optimized_expected": {
+        "tokens_min": 1500,
+        "tokens_max": 2500,
+        "tool_calls": 8,
+        "round_trips": 1,
+        "characteristics": [
+          "Basic pipeline structure first",
+          "Core implementation for step 1-2",
+          "Checkpoint: verify approach",
+          "Offer to continue with steps 3-5"
+        ]
+      },
+      "expected_savings": {
+        "tokens": "50-60%",
+        "tool_calls": "50-60%",
+        "round_trips": "66%"
+      }
+    },
+    {
+      "id": "scenario_009",
+      "name": "Exploratory Architecture Discussion",
+      "should_trigger": true,
+      "complexity": "medium",
+      "test_prompt": "I'm thinking about different architecture options for a real-time chat application. What should I consider?",
+      "baseline_expected": {
+        "tokens_min": 3000,
+        "tokens_max": 5000,
+        "tool_calls": 5,
+        "round_trips": 2,
+        "characteristics": [
+          "Detailed comparison of all architectures",
+          "Full pros/cons for each approach",
+          "Complete technology stack recommendations",
+          "Scaling considerations unprompted"
+        ]
+      },
+      "optimized_expected": {
+        "tokens_min": 1000,
+        "tokens_max": 1800,
+        "tool_calls": 2,
+        "round_trips": 1,
+        "characteristics": [
+          "3-4 key architecture patterns",
+          "High-level trade-offs",
+          "Offer to detail specific patterns",
+          "Offer stack recommendations if needed"
+        ]
+      },
+      "expected_savings": {
+        "tokens": "50-65%",
+        "tool_calls": "50-60%",
+        "round_trips": "50%"
+      }
+    },
+    {
+      "id": "scenario_010",
+      "name": "Casual Greeting",
+      "should_trigger": false,
+      "complexity": "trivial",
+      "test_prompt": "Hi! How are you today?",
+      "baseline_expected": {
+        "tokens_min": 30,
+        "tokens_max": 80,
+        "tool_calls": 0,
+        "round_trips": 1
+      },
+      "optimized_expected": {
+        "tokens_min": 30,
+        "tokens_max": 80,
+        "tool_calls": 0,
+        "round_trips": 1,
+        "note": "Should behave identically - skill should not activate"
+      },
+      "expected_savings": {
+        "tokens": "0%",
+        "note": "No optimization needed for casual conversation"
+      }
+    }
+  ],
+  "summary": {
+    "total_scenarios": 10,
+    "should_trigger": 7,
+    "should_not_trigger": 3,
+    "expected_average_savings": {
+      "tokens": "40-55%",
+      "tool_calls": "45-55%",
+      "round_trips": "50-60%"
+    }
+  },
+  "testing_instructions": {
+    "setup": [
+      "Install skill in Claude Code skills directory",
+      "Prepare test environment with consistent settings",
+      "Use same model (Sonnet 4.5) for all tests"
+    ],
+    "baseline_test": [
+      "Run each scenario WITHOUT skill enabled",
+      "Record token counts (input + output)",
+      "Record tool call count",
+      "Record number of round-trips",
+      "Note behavioral characteristics"
+    ],
+    "optimized_test": [
+      "Enable resource-minimizer skill",
+      "Run identical scenarios WITH skill",
+      "Record same metrics",
+      "Compare behaviors",
+      "Calculate percentage differences"
+    ],
+    "analysis": [
+      "Calculate average savings per category",
+      "Verify trigger conditions work correctly",
+      "Check quality hasn't degraded",
+      "Assess user experience impact",
+      "Generate statistical summary"
+    ]
+  },
+  "success_criteria": {
+    "token_reduction": ">30% for triggered scenarios",
+    "quality_maintenance": ">90% baseline accuracy",
+    "trigger_accuracy": ">85% correct activation/deactivation",
+    "user_satisfaction": ">4.0/5.0 rating"
+  }
+}
