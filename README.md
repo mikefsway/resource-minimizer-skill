@@ -53,40 +53,37 @@ Claude: "I'm assuming CSV with time-series data. [Shows key trends] I can detail
 
 **Structural & Design:** ✅ Yes - The skill has been validated for correct structure and sound design principles.
 
-**Empirical Effectiveness:** ⚠️ **Not yet** - The skill includes theoretical predictions of ~50-60% energy reduction, but these have NOT been verified with actual empirical testing.
+**Empirical Effectiveness:** ✅ Yes - Empirical testing was conducted using Claude Code native testing (Task-based agents) against 5 scenarios. See `testing/empirical_test_results.md` for full details.
 
-### Want to Test It Yourself?
+### Empirical Results (tested 2026-02-16)
 
-We've created a comprehensive testing framework in the `testing/` folder:
+| Metric | Result |
+|--------|--------|
+| Average token reduction (triggered scenarios) | **41.4%** |
+| Total token reduction across triggered scenarios | **51.6%** |
+| Tool call reduction | **75.0%** |
+| Quality maintenance | **~100%** |
+| Trigger accuracy | **100%** |
 
-**Start here:** `testing/START_HERE.md`
+Results across scenario complexity levels:
+- **High-complexity tasks**: 29.5% – 74.1% token reduction
+- **Medium-complexity tasks**: 9.1% – 16.9% token reduction
+- **Simple queries (control)**: 2.3% (skill correctly did not activate)
 
-The testing folder includes:
-- Step-by-step testing guide
-- 10 test scenarios
-- Energy assessment tool (Python)
-- Results templates
-- Analysis scripts
+### Run the Tests Yourself
 
-**Time required:** 30-60 minutes for meaningful results
+The `testing/` folder contains an automated testing framework. See `testing/README.md` to get started.
 
-### Predicted Effectiveness (Theoretical)
-
-Based on design analysis, the skill should:
-- Reduce token usage by 40-60%
-- Reduce energy consumption by 40-60%
-- Maintain quality above 90%
-- Reduce API costs by 40-60%
-
-**⚠️ These are predictions, not proven results.** Run the tests in `testing/` to verify!
+```bash
+cd testing
+pip install -r requirements.txt
+export ANTHROPIC_API_KEY="sk-ant-..."
+python3 automated_test_runner.py --quick
+```
 
 ### Share Your Results
 
-If you run empirical tests, please share your findings:
-1. Follow the guide in `testing/RUN_TESTS.md`
-2. Generate your report
-3. Open a GitHub issue with results
-4. Help validate (or refute) the predictions!
+If you run tests, please share your findings by opening a GitHub issue with your results. Additional data points help validate effectiveness across different use cases.
 
 ## Project Structure
 
@@ -98,18 +95,24 @@ resource-minimizer-skill/
 │       ├── efficiency-principles.md
 │       └── expansion-patterns.md
 ├── testing/                     # Testing framework
-│   ├── START_HERE.md           # Begin testing here
-│   ├── RUN_TESTS.md            # Detailed guide
-│   ├── test_scenarios.json     # Test prompts
-│   ├── energy_assessment.py    # Analysis tool
-│   └── ...                     # Templates and examples
+│   ├── README.md                # Start here
+│   ├── empirical_test_results.md # Actual test results
+│   ├── automated_test_runner.py # Main automated test script
+│   ├── claude_code_test_runner.py # Claude Code native runner
+│   ├── demo_automated_testing.sh  # Quick demo (try first)
+│   ├── test_scenarios.json      # Test prompts
+│   ├── energy_assessment.py     # Analysis tool
+│   ├── requirements.txt         # Python dependencies
+│   ├── AUTOMATED_TESTING_GUIDE.md
+│   ├── CLAUDE_CODE_NATIVE_TESTING.md
+│   └── test_results/            # Saved test run outputs
 └── README.md                    # This file
 ```
 
 ## Contributing
 
 Contributions welcome! Especially:
-- Empirical test results
+- Empirical test results from different use cases
 - Additional test scenarios
 - Improvements to efficiency patterns
 - Bug reports
