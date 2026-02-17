@@ -99,6 +99,39 @@ For long generation:
 
 **Expansion offer template:** "[Core answer]. I can [specific A], [specific B], or [specific C] if helpful."
 
+## Structure-First Codebase Navigation
+
+When working in codebases or large document sets, loading entire files to find specific information is a primary source of avoidable token use. The fix is a **discover → locate → read** discipline, inspired by structural indexing tools that achieve 80-90% token reductions for codebase traversal by querying structure rather than loading content.
+
+**The four-step pattern:**
+
+**1. Discover structure first (Glob, not Read)**
+Map the file tree before opening anything. Glob costs ~20 tokens; reading 10 files speculatively to find one symbol costs 5,000+.
+
+**2. Locate the target (Grep before Read)**
+Search for the symbol, function, or pattern to get exact file + line number, then Read only that region using `offset` and `limit` parameters.
+- ❌ Read entire 500-line file hoping the function is in there
+- ✅ Grep "def process_request" → file + line → Read 20 lines around it
+
+**3. Read only what's needed**
+Use Read's `offset`/`limit` to retrieve the relevant section. "Read the function" not "read the file."
+
+**4. Don't re-read what's already in context**
+If a file was read earlier in this session, its content is already in the context window. Checking context is free; a tool call is not.
+
+**Parallel reads:**
+When multiple independent files are needed, request them simultaneously. Sequential reads multiply latency and context reload cost needlessly.
+
+**Dependency-awareness before modifying:**
+Before changing a function, Grep for its callers. A 5-second scan that finds 8 callers prevents discovering them mid-task after the change is half-implemented - the most expensive possible moment.
+
+**If structural MCP tools are available** (e.g. `mcp-codebase-index` or similar):
+Prefer `find_symbol`, `get_dependents`, `get_function_source` over raw file reads. These return only needed structure at a fraction of the token cost. Reserve `Read` for getting actual implementation content once you know exactly where to look.
+
+**Applies beyond code:** The same pattern works for large documents - get the table of contents / headings first, then retrieve specific sections rather than loading the whole document.
+
+---
+
 ## Multi-Step Workflow Optimization
 
 **Dependency analysis:** Map dependencies → identify parallel opportunities → find early exit points.

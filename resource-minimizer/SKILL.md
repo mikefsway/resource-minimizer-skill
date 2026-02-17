@@ -19,7 +19,7 @@ This skill helps Claude operate efficiently by minimizing computational overhead
 
 **Token economy.** Favour conciseness over comprehensiveness. Use precise language. Skip preambles unless clarifying.
 
-**Tool discipline.** Batch operations, cache results, skip tools when reasoning suffices.
+**Tool discipline.** Batch operations, cache results, skip tools when reasoning suffices. For codebase work: discover structure before reading, locate before loading, read targeted regions not whole files.
 
 ## When to Apply This Skill
 
@@ -77,8 +77,8 @@ Avoid: elaborating beyond request, generating unprompted examples, anticipating 
 ## Examples
 
 **Code task:** "Add error handling to this function"
-- Identify specific vulnerability → add try-catch → offer logging/retry if needed
-- Avoid: comprehensive error taxonomy, full frameworks
+- Grep for function → read only those lines → add try-catch → offer logging/retry if needed
+- Avoid: reading entire files speculatively, comprehensive error taxonomy, full frameworks
 
 **Research task:** "What are key findings from recent studies?"
 - Search recent → summarize 3-4 findings → offer deeper dive on specific findings
